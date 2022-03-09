@@ -2,12 +2,14 @@ package com.shash.hellospringboot.services;
 
 import com.shash.hellospringboot.models.InventoryItem;
 import com.shash.hellospringboot.repositories.InventoryRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
+/**
+ * Contains various methods that perform CRUD operations on
+ * Inventory.
+ */
 public class CrudInventoryServiceImpl implements CrudInventoryService {
 
   @Autowired

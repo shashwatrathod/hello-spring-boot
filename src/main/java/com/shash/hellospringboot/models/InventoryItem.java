@@ -17,9 +17,13 @@ public class InventoryItem {
 
   /**
    * Creates a new InventoryItem that stores various data related to the item.
+   *
    * @param name name of the item
+   *
    * @param quantity quantity of the item
+   *
    * @param price price of this item
+   *
    * @param description a short description of this item
    */
   public InventoryItem(String id, String name, String quantity, String price, String description) {
@@ -33,6 +37,7 @@ public class InventoryItem {
 
   /**
    * Copy constructor for the InventoryItem.
+   *
    * @param otherItem the InventoryItem to copy.
    */
   public InventoryItem(InventoryItem otherItem) {

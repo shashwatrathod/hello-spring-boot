@@ -1,13 +1,14 @@
 package com.shash.hellospringboot.controllers;
 
 import com.shash.hellospringboot.models.Greeting;
-
 import java.util.concurrent.atomic.AtomicLong;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Defines various operations on the /greeting endpoint.
+ */
 @RestController
 public class GreetingController {
 
@@ -17,7 +18,9 @@ public class GreetingController {
   /**
    * Generates a greeting for the person whose name is passed as
    * the query parameter {@code name}.
+   *
    * @param name name of the person
+   *
    * @return the {@link Greeting}
    */
   @GetMapping("/greeting")
