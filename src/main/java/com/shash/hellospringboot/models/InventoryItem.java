@@ -31,6 +31,19 @@ public class InventoryItem {
     this.description = description;
   }
 
+  /**
+   * Copy constructor for the InventoryItem.
+   * @param otherItem the InventoryItem to copy.
+   */
+  public InventoryItem(InventoryItem otherItem) {
+    super();
+    this.id = otherItem.getId();
+    this.quantity = otherItem.getQuantity();
+    this.name = otherItem.getName();
+    this.price = otherItem.getPrice();
+    this.description = otherItem.getDescription();
+  }
+
   // ? Do we need all the setters and getters?
 
   public String getId() {

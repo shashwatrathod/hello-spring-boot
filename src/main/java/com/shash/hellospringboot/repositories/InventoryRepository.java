@@ -15,13 +15,13 @@ public interface InventoryRepository extends MongoRepository<InventoryItem, Stri
    * @return list of inventory items with the specified name.
    */
   @Query(value="{name: '?0'}")
-  List<InventoryItem> findItemByName(String name);
+  List<InventoryItem> findItemsByName(String name);
 
   /**
    * Finds the inventory item with the given id.
    * @param id id of the item to be fetched.
    * @return the item with the specified id.
    */
-  @Query(value="{name: '?0'}")
+  @Query(value="{id: '?0'}")
   InventoryItem findItemById(String id);
 }
