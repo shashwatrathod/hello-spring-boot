@@ -2,13 +2,11 @@ package com.shash.hellospringboot.services;
 
 import com.shash.hellospringboot.models.InventoryItem;
 import java.util.List;
-import org.springframework.stereotype.Service;
 
 /**
  * Contains the business logic for implementing CRUD operations on
  * the Inventory.
  */
-@Service
 public interface CrudInventoryService {
 
   /**

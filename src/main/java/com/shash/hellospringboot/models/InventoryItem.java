@@ -16,6 +16,11 @@ public class InventoryItem {
   private String description;
 
   /**
+   * Empty constructor for inventory items.
+   */
+  public InventoryItem() {}
+
+  /**
    * Creates a new InventoryItem that stores various data related to the item.
    *
    * @param name name of the item

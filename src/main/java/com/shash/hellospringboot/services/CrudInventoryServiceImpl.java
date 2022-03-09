@@ -5,11 +5,13 @@ import com.shash.hellospringboot.repositories.InventoryRepository;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * Contains various methods that perform CRUD operations on
  * Inventory.
  */
+@Service
 public class CrudInventoryServiceImpl implements CrudInventoryService {
 
   @Autowired
