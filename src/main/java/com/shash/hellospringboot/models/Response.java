@@ -6,20 +6,22 @@ package com.shash.hellospringboot.models;
 public interface Response {
 
   /**
-   * Returns the builder for Response. Builder can be used to set different
-   * parameters that the response returns.
-   */
-  static ResponseBuilder builder() {
-    return null;
-  }
-
-  /**
    * Returns whether the request was completed successfully.
    */
-  boolean isOk();
+  boolean getIsOk();
 
   /**
-   * Returns the message associated with this response.
+   * Returns the getMessage associated with this response.
    */
-  String message();
+  String getMessage();
+
+  /**
+   * Sets the status of this request.
+   */
+  void setIsOk(boolean isOk);
+
+  /**
+   * Sets the message to be returned.
+   */
+  void setMessage(String message);
 }

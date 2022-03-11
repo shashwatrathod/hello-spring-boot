@@ -5,53 +5,33 @@ package com.shash.hellospringboot.models;
  */
 public class ResponseImpl implements Response {
 
-  private final String message;
-  private final boolean isOk;
+  private String message;
+  private boolean isOk;
 
-  protected ResponseImpl(String message, boolean isOk) {
+  public ResponseImpl() {}
+
+  public ResponseImpl(String message, boolean isOk) {
     this.message = message;
     this.isOk = isOk;
   }
 
   @Override
-  public boolean isOk() {
+  public boolean getIsOk() {
     return this.isOk;
   }
 
   @Override
-  public String message() {
+  public String getMessage() {
     return this.message;
   }
 
-  public static ResponseBuilder builder() {
-    return new ResponseBuilderImpl();
+  @Override
+  public void setIsOk(boolean isOk) {
+    this.isOk = isOk;
   }
 
-  protected static class ResponseBuilderImpl implements ResponseBuilder {
-
-    private String message;
-    private boolean isOk;
-
-    protected ResponseBuilderImpl() {
-      this.message = "";
-      this.isOk = true;
-    }
-
-    @Override
-    public ResponseBuilder setIsOk(boolean isOk) {
-      this.isOk = isOk;
-      return this;
-    }
-
-    @Override
-    public ResponseBuilder setMessage(String message) {
-      this.message = message;
-      return this;
-    }
-
-    @Override
-    public Response build() {
-      return new ResponseImpl(message, isOk);
-    }
+  @Override
+  public void setMessage(String message) {
+    this.message = message;
   }
 }

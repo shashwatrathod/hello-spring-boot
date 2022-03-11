@@ -8,58 +8,23 @@ import java.util.List;
  */
 public class GetItemsResponseImpl extends ResponseImpl implements GetItemsResponse {
 
-  private final List<InventoryItem> items;
+  private List<InventoryItem> items;
 
-  protected GetItemsResponseImpl(List<InventoryItem> items,
+  public GetItemsResponseImpl() {}
+
+  public GetItemsResponseImpl(List<InventoryItem> items,
                                String message, boolean isOk) {
     super(message, isOk);
     this.items = new ArrayList<>(items);
   }
 
   @Override
-  public List<InventoryItem> items() {
+  public List<InventoryItem> getItems() {
     return new ArrayList<>(this.items);
   }
 
-  public static ItemsResponseBuilder builder() {
-    return new ItemsResponseBuilderImpl();
+  @Override
+  public void setItems(List<InventoryItem> items) {
+    this.items = items;
   }
-
-  protected static class ItemsResponseBuilderImpl extends ResponseBuilderImpl
-          implements ItemsResponseBuilder {
-
-    private List<InventoryItem> items;
-    private String message;
-    private boolean isOk;
-
-    private ItemsResponseBuilderImpl() {
-      this.items = new ArrayList<>();
-      this.message = "";
-      this.isOk = true;
-    }
-
-    @Override
-    public ItemsResponseBuilder setItems(List<InventoryItem> items) {
-      this.items = new ArrayList<>(items);
-      return this;
-    }
-
-    @Override
-    public ItemsResponseBuilder setIsOk(boolean isOk) {
-      this.isOk = isOk;
-      return this;
-    }
-
-    @Override
-    public ItemsResponseBuilder setMessage(String message) {
-      this.message = message;
-      return this;
-    }
-
-    @Override
-    public GetItemsResponse build() {
-      return new GetItemsResponseImpl(items, message, isOk);
-    }
-  }
-
 }

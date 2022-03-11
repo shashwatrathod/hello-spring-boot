@@ -1,9 +1,10 @@
 package com.shash.hellospringboot.services;
 
+import com.shash.hellospringboot.models.GetItemsResponse;
 import com.shash.hellospringboot.models.InventoryItem;
 import com.shash.hellospringboot.models.Response;
-
 import java.util.List;
+
 
 /**
  * Contains the business logic for implementing CRUD operations on
@@ -18,14 +19,14 @@ public interface CrudInventoryService {
    *
    * @return whether the item was successfully added.
    */
-  boolean addItem(InventoryItem newItem);
+  Response addItem(InventoryItem newItem);
 
   /**
    * Get all the items in the inventory.
    *
    * @return list of items in the inventory.
    */
-  List<InventoryItem> getAllItems();
+  GetItemsResponse getAllItems();
 
   /**
    * Gets all the items in the inventory with the specified name.
@@ -34,7 +35,7 @@ public interface CrudInventoryService {
    *
    * @return list of items that match the given condition.
    */
-  List<InventoryItem> getItemsByName(String name);
+  GetItemsResponse getItemsByName(String name);
 
   /**
    * Gets the item that matches the given id.
@@ -43,5 +44,5 @@ public interface CrudInventoryService {
    *
    * @return item with the given id.
    */
-  InventoryItem getItemById(String id);
+  GetItemsResponse getItemById(String id);
 }

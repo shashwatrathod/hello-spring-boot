@@ -1,12 +1,16 @@
 package com.shash.hellospringboot.controllers;
 
+import com.shash.hellospringboot.models.GetItemsResponse;
 import com.shash.hellospringboot.models.InventoryItem;
+import com.shash.hellospringboot.models.Response;
 import com.shash.hellospringboot.services.CrudInventoryService;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,27 +28,37 @@ public class InventoryController {
   private CrudInventoryService inventoryService;
 
   @GetMapping("/inventory")
-  public List<InventoryItem> getItems(@RequestParam(value = "id", defaultValue = "") String id,
-           @RequestParam(value = "name", defaultValue = "") String name) {
+  public GetItemsResponse getItems() {
 
-    List<InventoryItem> items = new ArrayList<>();
+    GetItemsResponse result = inventoryService.getAllItems();
 
-    if (id != null && !id.isEmpty()) {
-      InventoryItem item = inventoryService.getItemById(id);
-      if (item != null) {
-        items.add(item);
-      }
+    if (!result.getIsOk()) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, result.getMessage());
     }
 
-    if (name != null && !name.isEmpty()) {
-      items.addAll(inventoryService.getItemsByName(name));
+    return result;
+  }
+
+  @GetMapping("/inventory/id/{id}")
+  public GetItemsResponse getItemById(@PathVariable("id") String id) {
+    GetItemsResponse result = inventoryService.getItemById(id);
+
+    if (!result.getIsOk()) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, result.getMessage());
     }
 
-    if (items.size() > 0) {
-      return items;
+    return result;
+  }
+
+  @GetMapping("/inventory/name/{id}")
+  public GetItemsResponse getItemsByName(@PathVariable("name") String name) {
+    GetItemsResponse result = inventoryService.getItemsByName(name);
+
+    if (!result.getIsOk()) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, result.getMessage());
     }
 
-    return inventoryService.getAllItems();
+    return result;
   }
 
   /**
@@ -53,11 +67,13 @@ public class InventoryController {
    * @param item the item to be added.
    */
   @PostMapping("/inventory")
-  public void addItem(@RequestBody InventoryItem item) {
-    boolean result = inventoryService.addItem(item);
+  public ResponseEntity<Response> addItem(@RequestBody InventoryItem item) {
+    Response result = inventoryService.addItem(item);
 
-    if (!result) {
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid item");
+    if (!result.getIsOk()) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, result.getMessage());
     }
+
+    return new ResponseEntity<>(result, HttpStatus.OK);
   }
 }

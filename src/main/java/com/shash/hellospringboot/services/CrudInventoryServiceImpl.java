@@ -1,6 +1,10 @@
 package com.shash.hellospringboot.services;
 
+import com.shash.hellospringboot.models.GetItemsResponse;
+import com.shash.hellospringboot.models.GetItemsResponseImpl;
 import com.shash.hellospringboot.models.InventoryItem;
+import com.shash.hellospringboot.models.Response;
+import com.shash.hellospringboot.models.ResponseImpl;
 import com.shash.hellospringboot.repositories.InventoryRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,33 +22,46 @@ public class CrudInventoryServiceImpl implements CrudInventoryService {
   private InventoryRepository inventoryRepository;
 
   @Override
-  public boolean addItem(InventoryItem newItem) {
+  public Response addItem(InventoryItem newItem) {
+
     //TODO: Run validations
     if (newItem == null) {
-      return false;
+      new ResponseImpl("The item is null", false);
     }
     inventoryRepository.save(newItem);
-    return true;
+
+    return new ResponseImpl("", true);
   }
 
   @Override
-  public List<InventoryItem> getAllItems() {
-    return inventoryRepository.findAll();
+  public GetItemsResponse getAllItems() {
+    return new GetItemsResponseImpl(inventoryRepository.findAll(), "", true);
   }
 
   @Override
-  public List<InventoryItem> getItemsByName(String name) {
+  public GetItemsResponse getItemsByName(String name) {
     if (name == null || name.isEmpty()) {
-      return new ArrayList<InventoryItem>();
+      return new GetItemsResponseImpl(null, "Invalid name", false);
     }
-    return inventoryRepository.findItemsByName(name);
+    return new GetItemsResponseImpl(inventoryRepository.findItemsByName(name),
+            "", true);
   }
 
   @Override
-  public InventoryItem getItemById(String id) {
+  public GetItemsResponse getItemById(String id) {
     if (id == null || id.isEmpty()) {
-      return null;
+      return new GetItemsResponseImpl(null, "Invalid name", false);
     }
-    return inventoryRepository.findItemById(id);
+
+    List<InventoryItem> items = new ArrayList<>();
+
+    InventoryItem item = inventoryRepository.findItemById(id);
+
+    if (item != null) {
+      items.add(item);
+    }
+
+    return new GetItemsResponseImpl(items,
+            "", true);
   }
 }

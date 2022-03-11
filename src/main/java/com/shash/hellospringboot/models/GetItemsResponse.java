@@ -10,5 +10,10 @@ public interface GetItemsResponse extends Response {
   /**
    * Returns a list of inventory items that were requested.
    */
-  List<InventoryItem> items();
+  List<InventoryItem> getItems();
+
+  /**
+   * Sets the items that were requested.
+   */
+  void setItems(List<InventoryItem> items);
 }
