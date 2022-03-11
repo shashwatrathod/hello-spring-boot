@@ -26,6 +26,11 @@ public class InventoryController {
   @Autowired
   private CrudInventoryService inventoryService;
 
+  /**
+   * Get all the items in the inventory.
+   *
+   * @return a response containing all the items in the inventory.
+   */
   @GetMapping("/inventory")
   public GetItemsResponse getItems() {
 
@@ -38,6 +43,13 @@ public class InventoryController {
     return result;
   }
 
+  /**
+   * Get item with the given ID from the inventory.
+   *
+   * @param id id of the item to be found.
+   *
+   * @return a response containing the given item.
+   */
   @GetMapping("/inventory/id/{id}")
   public GetItemsResponse getItemById(@PathVariable("id") String id) {
     GetItemsResponse result = inventoryService.getItemById(id);
@@ -49,7 +61,14 @@ public class InventoryController {
     return result;
   }
 
-  @GetMapping("/inventory/name/{id}")
+  /**
+   * Get items matching the given name from the inventory.
+   *
+   * @param name name of the items to be found.
+   *
+   * @return list of items matching the given name.
+   */
+  @GetMapping("/inventory/name/{name}")
   public GetItemsResponse getItemsByName(@PathVariable("name") String name) {
     GetItemsResponse result = inventoryService.getItemsByName(name);
 
@@ -76,6 +95,15 @@ public class InventoryController {
     return new ResponseEntity<>(result, HttpStatus.OK);
   }
 
+  /**
+   * Update the item with the given id in the inventory.
+   *
+   * @param id id of the item to be updated.
+   *
+   * @param item the updated item.
+   *
+   * @return whether the item was successfully updated.
+   */
   @PutMapping("/inventory/{id}")
   public Response updateItem(@PathVariable("id") String id, @RequestBody InventoryItem item) {
     Response result = inventoryService.updateItem(id, item);
@@ -87,6 +115,13 @@ public class InventoryController {
     return result;
   }
 
+  /**
+   * Delete the item with the given id from the inventory.
+   *
+   * @param id id of the item to be deleted.
+   *
+   * @return whether the item was deleted.
+   */
   @DeleteMapping("/inventory/{id}")
   public Response deleteItem(@PathVariable("id") String id) {
     Response result = inventoryService.deleteItem(id);

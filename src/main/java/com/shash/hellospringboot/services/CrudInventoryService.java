@@ -45,6 +45,15 @@ public interface CrudInventoryService {
    */
   GetItemsResponse getItemById(String id);
 
+  /**
+   * Updates the item with the given id with the given item.
+   *
+   * @param id
+   *
+   * @param updatedItem
+   *
+   * @return
+   */
   Response updateItem(String id, InventoryItem updatedItem);
 
   Response deleteItem(String id);
