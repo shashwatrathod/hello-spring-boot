@@ -64,4 +64,30 @@ public class CrudInventoryServiceImpl implements CrudInventoryService {
     return new GetItemsResponseImpl(items,
             "", true);
   }
+
+  @Override
+  public Response updateItem(String id, InventoryItem updatedItem) {
+
+    if (updatedItem == null) {
+      return new ResponseImpl("The new item can't be null.", false);
+    }
+
+    InventoryItem item = inventoryRepository.findItemById(id);
+
+    if (item == null) {
+      return new ResponseImpl("Couldn't find an item with the given ID.", false);
+    }
+
+    updatedItem.setId(item.getId());
+
+
+    inventoryRepository.save(updatedItem);
+
+    return new ResponseImpl("", true);
+  }
+
+  @Override
+  public Response deleteItem(String id) {
+    return null;
+  }
 }

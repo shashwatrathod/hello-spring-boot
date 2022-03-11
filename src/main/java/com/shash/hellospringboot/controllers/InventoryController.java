@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -75,5 +76,16 @@ public class InventoryController {
     }
 
     return new ResponseEntity<>(result, HttpStatus.OK);
+  }
+
+  @PutMapping("/inventory/{id}")
+  public Response updateItem(@PathVariable("id") String id, @RequestBody InventoryItem item) {
+    Response result = inventoryService.updateItem(id, item);
+
+    if (!result.getIsOk()) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, result.getMessage());
+    }
+
+    return result;
   }
 }
