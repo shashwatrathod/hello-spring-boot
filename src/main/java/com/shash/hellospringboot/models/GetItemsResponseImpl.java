@@ -6,17 +6,14 @@ import java.util.List;
 /**
  * Represents the body of the response to be returned when items from the inventory are requested.
  */
-public class GetItemsResponseImpl implements GetItemsResponse {
+public class GetItemsResponseImpl extends ResponseImpl implements GetItemsResponse {
 
   private final List<InventoryItem> items;
-  private final String message;
-  private final boolean isOk;
 
-  private GetItemsResponseImpl(List<InventoryItem> items,
+  protected GetItemsResponseImpl(List<InventoryItem> items,
                                String message, boolean isOk) {
+    super(message, isOk);
     this.items = new ArrayList<>(items);
-    this.message = message;
-    this.isOk = isOk;
   }
 
   @Override
@@ -24,22 +21,12 @@ public class GetItemsResponseImpl implements GetItemsResponse {
     return new ArrayList<>(this.items);
   }
 
-
-  @Override
-  public boolean isOk() {
-    return this.isOk;
-  }
-
-  @Override
-  public String message() {
-    return this.message;
-  }
-
   public static ItemsResponseBuilder builder() {
     return new ItemsResponseBuilderImpl();
   }
 
-  private static class ItemsResponseBuilderImpl implements ItemsResponseBuilder {
+  protected static class ItemsResponseBuilderImpl extends ResponseBuilderImpl
+          implements ItemsResponseBuilder {
 
     private List<InventoryItem> items;
     private String message;
