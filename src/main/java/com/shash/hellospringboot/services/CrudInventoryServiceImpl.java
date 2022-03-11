@@ -88,6 +88,15 @@ public class CrudInventoryServiceImpl implements CrudInventoryService {
 
   @Override
   public Response deleteItem(String id) {
-    return null;
+
+    InventoryItem item = inventoryRepository.findItemById(id);
+
+    if (item == null) {
+      return new ResponseImpl("No item found with the given id.", false);
+    }
+
+    inventoryRepository.deleteById(id);
+
+    return new ResponseImpl("", true);
   }
 }
